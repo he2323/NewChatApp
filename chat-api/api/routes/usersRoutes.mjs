@@ -1,5 +1,3 @@
-"use strict"
+const usersRoutes = (app) => {};
 
-export default (app) =>{
-    app.route()
-}
+export default usersRoutes;
