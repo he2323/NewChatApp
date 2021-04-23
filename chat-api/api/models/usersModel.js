@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+"use strict"
+
+const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
@@ -16,4 +18,4 @@ const UserSchema = new Schema({
   status: { type: Boolean, default: false },
   privilage_level: { type: Number, enum: [1, 2, 3], default: 1 },
 });
-export default mongoose.model("UserModel", UserSchema);
+module.exports = mongoose.model("UserModel", UserSchema);

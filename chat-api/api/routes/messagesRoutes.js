@@ -1,5 +1,7 @@
-import * as message from "../controllers/messagesController.mjs";
-const messagesRoutes = (app) => {
+"use strict";
+
+const message = require("../controllers/messagesController");
+module.exports = (app, io) => {
   app.route("/message").post(message.send_message).get(message.list_messages);
 
   app
@@ -7,5 +9,3 @@ const messagesRoutes = (app) => {
     .delete(message.delete_message)
     .put(message.edit_message);
 };
-
-export default messagesRoutes;

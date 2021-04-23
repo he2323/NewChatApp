@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-
+"use strict"
+const mongoose = require("mongoose");
 const Message = mongoose.model("MessageModel");
 
-export const send_message = (req, res) => {
+const send_message = (req, res) => {
   const new_message = new Message(req.body);
   new_message.save((error, message) => {
     if (error) {
@@ -12,7 +12,7 @@ export const send_message = (req, res) => {
     res.json(message);
   });
 };
-export const list_messages = (req, res) =>
+const list_messages = (req, res) =>
   Message.find({ chat: req.body.chatId })
     .sort({ _id: -1 })
     .limit(req.body.pagination || 10)
@@ -23,7 +23,7 @@ export const list_messages = (req, res) =>
       }
       res.json(messages);
     });
-export const delete_message = (req, res) =>
+const delete_message = (req, res) =>
   Message.findByIdAndDelete(req.params.messageId, (error, message) => {
     if (error) {
       res.send(error);
@@ -33,7 +33,7 @@ export const delete_message = (req, res) =>
       message: `Message: ${message} was successfully deleted. Be happy!`,
     });
   });
-export const edit_message = (req, res) =>
+const edit_message = (req, res) =>
   Message.findByIdAndUpdate(
     req.params.messageId,
     { text: req.body.text },
@@ -45,3 +45,4 @@ export const edit_message = (req, res) =>
       res.json({ message: `Edited message ${message}` });
     }
   );
+module.exports = { send_message, edit_message, delete_message, list_messages };
